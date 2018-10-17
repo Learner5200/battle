@@ -1,7 +1,13 @@
-class Game
+class Game #could I create new players in the initialization?
+  attr_reader :player_one, :player_two
 
-  def attack(player)
-    player.reduce_hp
+  def initialize(player_one, player_two)
+    @player_one = player_one
+    @player_two = player_two
+  end
+
+  def attack(target)
+    target.reduce_hp
     @just_attacked = true
   end
 
