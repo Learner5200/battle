@@ -19,5 +19,5 @@ class Battle < Sinatra::Base
     @player_two = session[:player_two]
     erb(:play)
   end
-  run! if app_file == $0
+  run! if app_file == $0 # run the overall application if this is the file we start the app from (as opposed to config)
 end
