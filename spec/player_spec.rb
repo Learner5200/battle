@@ -17,6 +17,7 @@ describe Player do
 
   describe '#reduce_hp' do
     it 'reduces hp' do
+      allow(Kernel).to receive(:rand).and_return(10)
       expect{ player.reduce_hp }.to change{ player.hp }.by(-10)
     end
   end

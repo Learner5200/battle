@@ -9,7 +9,7 @@ class Player
   end
 
   def reduce_hp
-    @hp -= 10
+    @hp -= Kernel.rand(5..15)
   end
 
   def attack(player)

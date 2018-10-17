@@ -1,8 +1,8 @@
 require 'game'
 
 describe Game do
-  let(:player1) { double(:player1, reduce_hp: true) }
-  let(:player2) { double(:player2, reduce_hp: true) }
+  let(:player1) { double(:player1, hp: 60, reduce_hp: true) }
+  let(:player2) { double(:player2, hp: 60, reduce_hp: true) }
   let(:game) { Game.new(player1, player2) }
 
 
@@ -45,6 +45,24 @@ describe Game do
       game.attack
       game.switch_player
       expect(game.just_attacked?).to be_falsy
+    end
+  end
+
+  describe '#winner' do
+    it 'returns player 1 if player 1 wins' do
+      allow(player2).to receive(:hp).and_return(0)
+      expect(game.winner).to eq(player1)
+    end
+  end
+
+  describe '#complete?' do
+    it 'begins false' do
+      expect(game.complete?).to be_falsy
+    end
+
+    it 'returns true if there is a winner' do
+      allow(player2).to receive(:hp).and_return(0)
+      expect(game.complete?).to be_truthy
     end
   end
 end

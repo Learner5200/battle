@@ -17,7 +17,10 @@ feature "play page" do
   end
 
   context "after attacking player two" do
-    before { click_button "Attack!" }
+    before do
+      allow(Kernel).to receive(:rand).and_return(10)
+      click_button "Attack!"
+    end
     it "should reduce hitpoints" do
       expect(page).to have_content("Squirtle: 50hp")
     end
@@ -41,5 +44,15 @@ feature "play page" do
     end
 
   end
+
+  context "player 2 hp reduced to 0" do
+    scenario "displays player 1 victory message" do
+      allow(Kernel).to receive(:rand).and_return(60)
+      click_button "Attack!"
+      expect(page).to have_content("Charmander wins!")
+    end
+  end
+
+
 
 end

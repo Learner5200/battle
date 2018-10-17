@@ -1,5 +1,6 @@
 class Game #could I create new players in the initialization?
-  attr_reader :player_one, :player_two, :current_player
+  attr_reader :player_one, :player_two
+  attr_accessor :just_attacked
 
   def initialize(player_one, player_two)
     @player_one = player_one
@@ -22,8 +23,30 @@ class Game #could I create new players in the initialization?
     @just_attacked = false
   end
 
+  def current_player
+    @current_player
+  end
+
   def current_target
-    @players.find { |player| player != @current_player }
+    other(@current_player)
+  end
+
+  def winner
+    other(loser)
+  end
+
+  def complete?
+    !!loser # returns true iff someone has fallen to hp <= 0
+  end
+
+  private
+
+  def other(player)
+    @players.find { |other| other != player}
+  end
+
+  def loser
+    @players.find { |player| player.hp <= 0 }
   end
 
 end
