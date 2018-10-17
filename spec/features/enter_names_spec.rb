@@ -1,9 +1,23 @@
-feature "names form" do
+feature "play page" do
+
+  before { sign_in_and_play }
   scenario "submitted names should appear on screen" do
-    visit "/"
-    fill_in(:player_one, with: "Imtiyaz")
-    fill_in(:player_two, with: "Chris")
-    click_button('submit')
-    expect(page).to have_content("Imtiyaz vs Chris")
+    expect(page).to have_content("Charmander vs Squirtle")
+  end
+
+  scenario "player two default hitpoints should appear on screen" do
+    expect(page).to have_content("Squirtle: 60hp")
+  end
+
+  context "when attacking player two" do
+    it "should reduce hitpoints" do
+      click_button "Attack!"
+      expect(page).to have_content("Squirtle: 50hp")
+    end
+
+    it "should display confirmation" do
+      click_button "Attack!"
+      expect(page).to have_content("Charmander attacked Squirtle!")
+    end
   end
 end
