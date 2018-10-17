@@ -1,11 +1,19 @@
 <h2><%= @game.player_one.name %> vs <%=@game.player_two.name %></h2>
 
+<h3><%= @game.current_player.name %>'s Turn</h3>
+
+<p><%= @game.player_one.name %>: <%= @game.player_one.hp %>hp</p>
 <p><%= @game.player_two.name %>: <%= @game.player_two.hp %>hp</p>
 
-<form action="/attack" method="post">
-    <input type="submit" name="attack" value="Attack!" />
-</form>
+<% unless @game.just_attacked? %>
+  <form action="/attack" method="post">
+      <input type="submit" value="Attack!" />
+  </form>
+<% end %>
 
 <% if @game.just_attacked? %>
-  <p><%= @game.player_one.name %> attacked <%= @game.player_two.name %>!</p>
+  <p><%= @game.current_player.name %> attacked <%= @game.current_target.name %>!</p>
+  <form action="/switch" method="post">
+      <input type="submit" value="Switch Player" />
+  </form>
 <% end %>

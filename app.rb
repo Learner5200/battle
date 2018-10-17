@@ -22,7 +22,12 @@ class Battle < Sinatra::Base
   end
 
   post '/attack' do
-    $game.attack($game.player_two)
+    $game.attack
+    redirect to('/play')
+  end
+
+  post '/switch' do
+    $game.switch_player
     redirect to('/play')
   end
 
