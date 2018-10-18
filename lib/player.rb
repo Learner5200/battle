@@ -1,6 +1,6 @@
 class Player
   DEFAULT_HP = 60
-  DAMAGE_RANGE = 5..15
+  DAMAGE_RANGE = 20..30
 
   attr_reader :name, :hp
 

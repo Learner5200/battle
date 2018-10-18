@@ -1,6 +1,14 @@
-require 'attacker'
+require_relative 'attacker'
 
 class Game
+
+  def self.create(player_one, player_two, attacker=Attacker.new)
+    @current_game = Game.new(player_one, player_two, attacker)
+  end
+  def self.current_game
+    @current_game
+  end
+
   attr_reader :player_one, :player_two, :current_player, :attacker
   attr_accessor :just_attacked
 
