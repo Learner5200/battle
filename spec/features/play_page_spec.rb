@@ -49,7 +49,7 @@ feature "play page" do
     scenario "displays player 1 victory message" do
       allow(Kernel).to receive(:rand).and_return(60)
       click_button "Attack!"
-      expect(page).to have_content("Charmander wins!")
+      expect(page).to have_content("Charmander wins! Better luck next time, Squirtle!")
     end
   end
 

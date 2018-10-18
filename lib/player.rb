@@ -1,5 +1,6 @@
 class Player
   DEFAULT_HP = 60
+  DAMAGE_RANGE = 5..15
 
   attr_reader :name, :hp
 
@@ -9,12 +10,7 @@ class Player
   end
 
   def reduce_hp
-    @hp -= Kernel.rand(5..15)
-  end
-
-  def attack(player)
-    player.reduce_hp
-    @just_attacked = true
+    @hp -= Kernel.rand(DAMAGE_RANGE)
   end
 
 end
