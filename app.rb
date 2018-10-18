@@ -6,6 +6,8 @@ require "./lib/attacker"
 class Battle < Sinatra::Base
   # enable :sessions
 
+  before { @game = Game.current_game }
+
   get '/' do
     erb(:index)
   end
@@ -18,14 +20,12 @@ class Battle < Sinatra::Base
   end
 
   get '/play' do
-    @game = Game.current_game
     erb(:play)
   end
 
   post '/attack' do
-    game = Game.current_game
-    game.attacker.attack(game.current_target)
-    if game.complete?
+    @game.attacker.attack(@game.current_target)
+    if @game.complete?
       redirect to('/complete')
     else
       redirect to('/play')
@@ -33,12 +33,11 @@ class Battle < Sinatra::Base
   end
 
   post '/switch' do
-    Game.current_game.switch_player
+    @game.switch_player
     redirect to('/play')
   end
 
   get '/complete' do
-    @game = Game.current_game
     erb(:complete)
   end
 
